@@ -84,6 +84,19 @@ in
     "z /mnt/data-blue 0777 root users - -"
   ];
 
+  # 两块 HDD 空闲 1 小时后停转。hd-idle 不依赖固件定时器，实测两块盘都响应。
+  # 与 smartmontools 的轮询冲突，不要同时启用 smartd。
+  systemd.services.hd-idle = {
+    description = "Spin down idle hard disks";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.hd-idle}/bin/hd-idle -i 0 -c ata -a sda -i 3600 -a sdb -i 3600 -l /var/log/hd-idle.log";
+      Restart = "always";
+      RestartSec = 10;
+    };
+  };
+
   # 磁盘无交换分区。用 zram 提供交换，上限为内存的 10%。
   zramSwap.enable = true;
   zramSwap.memoryPercent = 10;
