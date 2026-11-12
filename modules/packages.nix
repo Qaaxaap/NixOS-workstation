@@ -108,6 +108,9 @@
     micromamba
     jupyter
     python3
+    python3Packages.numpy
+    python3Packages.torch-bin
+    python3Packages.torchvision-bin
 
     # 虚拟化
     qemu
