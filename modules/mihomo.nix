@@ -11,7 +11,8 @@
 
     serviceConfig = {
       Type = "simple";
-      ExecStart = "${lib.getExe pkgs.mihomo} -d /var/lib/mihomo -f /var/lib/mihomo/config.yaml";
+      # metacubexd 是 mihomo 官方 web 面板，通过 9090 的 /ui/ 提供。
+      ExecStart = "${lib.getExe pkgs.mihomo} -d /var/lib/mihomo -f /var/lib/mihomo/config.yaml -ext-ui ${pkgs.metacubexd}";
       Restart = "on-failure";
       RestartSec = 5;
       StateDirectory = "mihomo";
