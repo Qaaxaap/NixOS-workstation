@@ -4,10 +4,14 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
+  # NVMe 盘在 RST VMD 控制器下，initrd 必须带 vmd，否则找不到根盘。
+  # 其余模块来自 nixos-generate-config，另补 USB 存储与 2.5G 网卡。
   boot.initrd.availableKernelModules = [
+    "vmd"
     "xhci_pci"
     "ahci"
     "nvme"
+    "uas"
     "usb_storage"
     "sd_mod"
     "r8169"
