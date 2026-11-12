@@ -8,7 +8,6 @@
     serviceConfig = {
       Type = "simple";
       User = "Qaaxaap";
-      Group = "Qaaxaap";
       WorkingDirectory = "/home/Qaaxaap/Projects/ChatAPI/backend";
       EnvironmentFile = "/home/Qaaxaap/Projects/ChatAPI/backend/.env";
       ExecStart = "/home/Qaaxaap/.nix-profile/bin/chatapi";
