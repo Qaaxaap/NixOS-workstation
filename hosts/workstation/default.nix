@@ -1,4 +1,4 @@
-{ config, lib, pkgs, unstable, ... }:
+{ config, lib, pkgs, ... }:
 {
   imports = [
     ./hardware.nix
@@ -24,8 +24,9 @@
       clash-party = final.callPackage ../../pkgs/clash-party.nix { };
       bambu-studio-bin = final.callPackage ../../pkgs/bambu-studio-bin.nix { };
 
-      # 26.05 的下载 URL 失效。
-      inherit (unstable) qq wechat;
+      # 26.05 自带的 qq 与 wechat 下载 URL 失效，用自打包的 deb 版本。
+      qq = final.callPackage ../../pkgs/qq-bin.nix { };
+      wechat = final.callPackage ../../pkgs/wechat-bin.nix { };
       frpc-of = final.callPackage ../../pkgs/frpc-of.nix { };
     })
   ];
