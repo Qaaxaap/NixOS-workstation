@@ -21,6 +21,7 @@
   nixpkgs.overlays = [
     (final: prev: {
       clash-party = final.callPackage ../../pkgs/clash-party.nix { };
+      bambu-studio-bin = final.callPackage ../../pkgs/bambu-studio-bin.nix { };
       frpc-of = final.callPackage ../../pkgs/frpc-of.nix { };
     })
   ];

@@ -87,7 +87,7 @@
     winetricks
 
     # 3D 打印
-    bambu-studio
+    bambu-studio-bin
     orca-slicer
 
     # 硬件工具
