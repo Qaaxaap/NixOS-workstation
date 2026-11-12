@@ -17,6 +17,7 @@
     ../../modules/snapshot.nix
     ../../modules/nh.nix
     ../../modules/clash-party.nix
+    ../../modules/mihomo.nix
   ];
 
   # 仓库内自打包的包。
