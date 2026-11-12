@@ -15,7 +15,7 @@
     # 基础工具
     _7zz
     git
-    make
+    gnumake
     unzip
     ripgrep
     fd
