@@ -35,13 +35,6 @@
     trusted-users = [ "root" "Qaaxaap" ];
   };
 
-  # 每周清理 30 天前的 generation。
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 30d";
-  };
-
   networking.hostName = "QaaxaapServer";
   time.timeZone = "Asia/Shanghai";
 
