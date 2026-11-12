@@ -32,7 +32,11 @@
   ];
 
   # 国内镜像。软件源顺序即优先级。
+  # 国内镜像。软件源顺序即优先级。
   nix.settings = {
+    # nh 与 nixos-rebuild 内部调用需要。缺了 nix profile 会报未启用。
+    experimental-features = [ "nix-command" "flakes" ];
+
     substituters = [
       "https://mirrors.ustc.edu.cn/nix-channels/store"
       "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
