@@ -29,6 +29,10 @@
     fcitx5.waylandFrontend = true;
   };
 
+  # KDE 的 fcitx5 启动器直接运行普通 fcitx5 包，绕过了 with-addons 的 wrapper，
+  # 缺少这个变量时 rime 插件加载失败，输入法显示“中州韵（不可用）”。
+  environment.variables.FCITX_ADDON_DIRS = "${config.i18n.inputMethod.package}/lib/fcitx5";
+
   fonts = {
     packages = with pkgs; [
       noto-fonts
