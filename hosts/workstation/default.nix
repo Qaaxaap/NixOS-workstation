@@ -16,6 +16,7 @@
     ../../modules/chatapi.nix
     ../../modules/snapshot.nix
     ../../modules/nh.nix
+    ../../modules/clash-party.nix
   ];
 
   # 仓库内自打包的包。
