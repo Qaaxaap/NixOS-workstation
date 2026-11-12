@@ -8,9 +8,15 @@
   programs.steam.enable = true;
   programs.dconf.enable = true;
 
+  # 允许运行预编译的动态链接程序。VSCodium Remote 的 server 需要它。
+  programs.nix-ld.enable = true;
+
   environment.systemPackages = with pkgs; [
     # 基础工具
     _7zz
+    git
+    make
+    unzip
     ripgrep
     fd
     fzf
