@@ -19,6 +19,23 @@
     };
   };
 
+  # nftables 相关内核模块。NixOS 默认只懒加载一部分，重启后缺失这些模块时
+  # mihomo 的 auto-redirect 会失败并降级纯 TUN（不建策略路由），本机流量直连被墙。
+  boot.kernelModules = [
+    "nft_nat"
+    "nft_redir"
+    "nft_chain_nat"
+    "nft_socket"
+    "nft_fib"
+    "nft_fib_inet"
+    "nft_fib_ipv4"
+    "nft_fib_ipv6"
+    "nft_queue"
+    "nft_tproxy"
+    "nft_log"
+    "nft_counter"
+  ];
+
   # 系统 DNS 交给 mihomo。fake-ip 只回 A 记录，应用不会产生 IPv6 连接。
   networking.networkmanager.dns = "none";
   networking.resolvconf.enable = true;
