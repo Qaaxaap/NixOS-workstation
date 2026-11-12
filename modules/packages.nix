@@ -72,6 +72,7 @@ in
     nodejs
     pnpm
     uv
+    tmux
 
     # KDE 应用
     kdePackages.ark
