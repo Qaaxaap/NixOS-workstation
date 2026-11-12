@@ -38,9 +38,15 @@
     experimental-features = [ "nix-command" "flakes" ];
 
     substituters = [
+      # CUDA 包专用缓存。nixpkgs 官方不构建 CUDA 包。
+      "https://cache.nixos-cuda.org"
       "https://mirrors.ustc.edu.cn/nix-channels/store"
       "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
       "https://cache.nixos.org"
+    ];
+    # CUDA 缓存的公钥。不显式加入会导致签名验证失败。
+    trusted-public-keys = [
+      "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
     ];
     trusted-users = [ "root" "Qaaxaap" ];
   };
