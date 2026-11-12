@@ -9,6 +9,14 @@
     extraGroups = [ "wheel" "networkmanager" "docker" ];
   };
 
+  # 独立普通用户。首次 rebuild 后用 passwd 设置密码。
+  users.users.Vesperon = {
+    isNormalUser = true;
+    home = "/home/Vesperon";
+    shell = pkgs.zsh;
+    extraGroups = [ "networkmanager" ];
+  };
+
   # 仅 SSH。保留 uid 955，@home 属主不变。NixOS 不允许普通用户 uid 小于 1000。
   users.users.Pulsar = {
     isSystemUser = true;
