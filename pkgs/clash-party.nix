@@ -107,12 +107,17 @@ stdenv.mkDerivation rec {
     runHook postInstall
   '';
 
-  # TUN 需要 setuid root 的内核。store 是 ro,nosuid，内核改放 share，
-  # resources/sidecar 指向 /var/lib，由 NixOS 模块复制并设置 setuid。
+  # TUN 需要 setuid root 的内核。store 是 ro,nosuid，所以内核放 share，
+  # resources/sidecar 指向 security.wrappers 生成的 setuid 包装器。
   postFixup = ''
     mkdir -p $out/share/clash-party
     mv $out/opt/clash-party/resources/sidecar $out/share/clash-party/sidecar
-    ln -s /var/lib/clash-party/sidecar $out/opt/clash-party/resources/sidecar
+
+    mkdir -p $out/opt/clash-party/resources/sidecar
+    ln -s /run/wrappers/bin/clash-party-mihomo $out/opt/clash-party/resources/sidecar/mihomo
+    ln -s /run/wrappers/bin/clash-party-mihomo-alpha $out/opt/clash-party/resources/sidecar/mihomo-alpha
+    ln -s /run/wrappers/bin/clash-party-mihomo-smart $out/opt/clash-party/resources/sidecar/mihomo-smart
+    ln -s $out/share/clash-party/sidecar/sysproxy.linux-x64-gnu.node $out/opt/clash-party/resources/sidecar/sysproxy.linux-x64-gnu.node
   '';
 
   meta = with lib; {
