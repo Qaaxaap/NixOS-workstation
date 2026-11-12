@@ -67,6 +67,23 @@ in
     ];
   };
 
+  # 蓝盘（WD40EZZX）btrfs，label 为 data-blue。与 NTFS 的 /mnt/data 区分。
+  fileSystems."/mnt/data-blue" = {
+    device = "/dev/disk/by-uuid/06efa7a5-099a-4fa9-81ff-e16ae80e23f6";
+    fsType = "btrfs";
+    options = [
+      "compress=zstd:3"
+      "noatime"
+      "space_cache=v2"
+      "nofail"
+    ];
+  };
+
+  # 挂载点属主设为 Qaaxaap，便于直接写入。
+  systemd.tmpfiles.rules = [
+    "d /mnt/data-blue 0755 Qaaxaap users - -"
+  ];
+
   # 磁盘无交换分区。用 zram 提供交换，上限为内存的 10%。
   zramSwap.enable = true;
   zramSwap.memoryPercent = 10;
