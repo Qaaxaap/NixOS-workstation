@@ -23,7 +23,8 @@
     ports = [ 2222 ];
     settings = {
       PermitRootLogin = "no";
-      PasswordAuthentication = false;
+      # 临时允许密码登录。frp 隧道把 2222 暴露到公网，用完改回 false。
+      PasswordAuthentication = true;
       KbdInteractiveAuthentication = false;
     };
   };
