@@ -107,6 +107,14 @@ stdenv.mkDerivation rec {
     runHook postInstall
   '';
 
+  # TUN 需要 setuid root 的内核。store 是 ro,nosuid，内核改放 share，
+  # resources/sidecar 指向 /var/lib，由 NixOS 模块复制并设置 setuid。
+  postFixup = ''
+    mkdir -p $out/share/clash-party
+    mv $out/opt/clash-party/resources/sidecar $out/share/clash-party/sidecar
+    ln -s /var/lib/clash-party/sidecar $out/opt/clash-party/resources/sidecar
+  '';
+
   meta = with lib; {
     description = "Mihomo GUI client (Clash Party)";
     homepage = "https://clashparty.org";
