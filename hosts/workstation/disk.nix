@@ -79,9 +79,9 @@ in
     ];
   };
 
-  # 所有用户可读写。新文件权限仍受各用户 umask 限制。
+  # 所有用户可读写。z 会调整已存在的挂载点，d 只创建不修改。
   systemd.tmpfiles.rules = [
-    "d /mnt/data-blue 0777 root users - -"
+    "z /mnt/data-blue 0777 root users - -"
   ];
 
   # 磁盘无交换分区。用 zram 提供交换，上限为内存的 10%。
