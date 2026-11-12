@@ -11,6 +11,11 @@
   environment.systemPackages = with pkgs; [
     # 基础工具
     _7zz
+    ripgrep
+    fd
+    fzf
+    nix-output-monitor
+    direnv
     alsa-tools
     alsa-utils
     bmon
@@ -44,6 +49,7 @@
     pyright
     platformio-core
     nodejs
+    pnpm
 
     # KDE 应用
     kdePackages.ark

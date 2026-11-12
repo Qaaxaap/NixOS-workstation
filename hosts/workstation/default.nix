@@ -14,6 +14,7 @@
     ../../modules/frpc.nix
     ../../modules/chatapi.nix
     ../../modules/snapshot.nix
+    ../../modules/nh.nix
   ];
 
   # 仓库内自打包的包。
