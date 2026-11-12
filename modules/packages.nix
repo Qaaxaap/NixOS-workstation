@@ -1,4 +1,16 @@
 { config, lib, pkgs, ... }:
+let
+  # Python 包必须通过 withPackages 挂进解释器，直接列在 systemPackages 里
+  # 只会链接到 sw/lib，解释器的 sys.path 看不到。
+  pythonEnv = pkgs.python3.withPackages (ps: with ps; [
+    numpy
+    torch-bin
+    torchvision-bin
+    jupyterlab
+    notebook
+    ipython
+  ]);
+in
 {
   nixpkgs.config.allowUnfree = true;
 
@@ -106,11 +118,8 @@
 
     # AI 与数据处理
     micromamba
-    jupyter
-    python3
-    python3Packages.numpy
-    python3Packages.torch-bin
-    python3Packages.torchvision-bin
+    pythonEnv
+    (writeShellScriptBin "python" "exec ${pythonEnv}/bin/python3 \"$@\"")
 
     # 虚拟化
     qemu
