@@ -9,6 +9,9 @@ let
     jupyterlab
     notebook
     ipython
+    matplotlib
+    pandas
+    tqdm
   ]);
 in
 {
@@ -68,6 +71,7 @@ in
     platformio-core
     nodejs
     pnpm
+    uv
 
     # KDE 应用
     kdePackages.ark
