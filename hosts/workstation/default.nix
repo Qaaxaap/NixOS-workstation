@@ -29,14 +29,10 @@
       wechat = final.callPackage ../../pkgs/wechat-bin.nix { };
       frpc-of = final.callPackage ../../pkgs/frpc-of.nix { };
 
-      # 单 GPU 机器不需要 NVSHMEM。用空包替换 libnvshmem，避免编译。
+      # 单 GPU 机器不需要 NVSHMEM 通信，但 torch 的 libtorch_cuda 链接了它。
+      # nixpkgs 的 libnvshmem 需要源码编译，改用 NVIDIA 官方二进制归档。
       cudaPackages = prev.cudaPackages.overrideScope (cudaFinal: cudaPrev: {
-        libnvshmem = prev.stdenvNoCC.mkDerivation {
-          pname = "libnvshmem";
-          version = "3.6.5";
-          dontUnpack = true;
-          installPhase = "mkdir -p $out/lib $out/include";
-        };
+        libnvshmem = final.callPackage ../../pkgs/libnvshmem-bin.nix { };
       });
     })
   ];
