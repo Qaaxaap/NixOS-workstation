@@ -28,10 +28,19 @@
       qq = final.callPackage ../../pkgs/qq-bin.nix { };
       wechat = final.callPackage ../../pkgs/wechat-bin.nix { };
       frpc-of = final.callPackage ../../pkgs/frpc-of.nix { };
+
+      # 单 GPU 机器不需要 NVSHMEM。用空包替换 libnvshmem，避免编译。
+      cudaPackages = prev.cudaPackages.overrideScope (cudaFinal: cudaPrev: {
+        libnvshmem = prev.stdenvNoCC.mkDerivation {
+          pname = "libnvshmem";
+          version = "3.6.5";
+          dontUnpack = true;
+          installPhase = "mkdir -p $out/lib $out/include";
+        };
+      });
     })
   ];
 
-  # 国内镜像。软件源顺序即优先级。
   # 国内镜像。软件源顺序即优先级。
   nix.settings = {
     # nh 与 nixos-rebuild 内部调用需要。缺了 nix profile 会报未启用。
