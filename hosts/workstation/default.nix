@@ -18,6 +18,7 @@
     ../../modules/nh.nix
     ../../modules/clash-party.nix
     ../../modules/mihomo.nix
+    ../../modules/openrgb.nix
   ];
 
   # 仓库内自打包的包。
