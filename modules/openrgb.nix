@@ -14,6 +14,8 @@
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = true;
+      # boot.kernelModules 只在启动时加载，服务里再确保一次。
+      ExecStartPre = "${pkgs.kmod}/bin/modprobe i2c-dev";
     };
     script = ''
       sleep 3
