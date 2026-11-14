@@ -12,6 +12,12 @@ let
     matplotlib
     pandas
     tqdm
+    transformers
+    huggingface-hub
+    tokenizers
+    safetensors
+    jinja2
+    regex
   ]);
 in
 {
