@@ -16,6 +16,8 @@ curl -fsSL -H 'User-Agent: mihomo.party/v2.0.4 (clash.meta)' "$url" -o "$tmp"
 # 机场要求不要覆写 DNS 配置。这里只改运行必需的三项：
 # listen 换成系统 DNS 能访问的 53 端口，ipv6 关闭避免解析出 v6，
 # default-nameserver 固定为公共 IP 以打破 system 自解析循环。
+# 另外把 OpenFrp 客户端与隧道域名的规则放到最前面：frpc 到 frps 节点的
+# 控制连接不能走代理，否则隧道会反复断开，公网访问报 Not allowed at this time。
 nix run nixpkgs#yq-go -- -i '
   .["mixed-port"] = 7890 |
   .["external-controller"] = "127.0.0.1:9090" |
@@ -29,7 +31,13 @@ nix run nixpkgs#yq-go -- -i '
   .tun.mtu = 1500 |
   .dns.listen = "127.0.0.1:53" |
   .dns.ipv6 = false |
-  .dns["default-nameserver"] = ["223.5.5.5", "119.29.29.29"]
+  .dns["default-nameserver"] = ["223.5.5.5", "119.29.29.29"] |
+  .rules = [
+    "PROCESS-NAME,frpc-of,DIRECT",
+    "DOMAIN-SUFFIX,ofalias.net,DIRECT",
+    "DOMAIN-SUFFIX,naids.com,DIRECT",
+    "DOMAIN-SUFFIX,openfrp.net,DIRECT"
+  ] + (.rules // [])
 ' "$tmp"
 
 install -m 600 "$tmp" "$out"
