@@ -51,6 +51,12 @@
         GITHUB_APP__PR_COMMANDS = "[]";
         # findings 优先发成行内 review 评论；无法锚定或已合并 PR 回退到摘要。
         PR_REVIEWER__INLINE_KEY_ISSUES = "true";
+        # Gated auto-approval：/review 判定 no_concerns_found 时批准审阅的 commit。
+        # max_changed_lines 默认 100，对大 PR 会直接否决 no_concerns_found。
+        CONFIG__ENABLE_AUTO_APPROVAL = "true";
+        PR_REVIEWER__REQUIRE_MERGE_RECOMMENDATION = "true";
+        PR_REVIEWER__REQUIRE_RISK_ASSESSMENT = "true";
+        PR_REVIEWER__MAX_CHANGED_LINES = "2000";
       };
     };
   };
