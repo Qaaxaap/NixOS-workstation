@@ -6,6 +6,7 @@
     containers = {
       four-person-group = {
         image = "itzg/minecraft-server";
+        autoStart = false;
         ports = [
           "25565:25565"
           "25575:25575"
@@ -25,6 +26,7 @@
 
       mtr-fabric = {
         image = "itzg/minecraft-server";
+        autoStart = false;
         ports = [
           "25566:25565"
           "25576:25575"
@@ -46,6 +48,7 @@
 
       mc-tng = {
         image = "itzg/minecraft-server";
+        autoStart = false;
         ports = [
           "25595:25565"
           "25596:25575"
