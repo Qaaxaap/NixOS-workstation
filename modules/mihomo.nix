@@ -36,6 +36,11 @@
     "nft_counter"
   ];
 
+  # tailscaled 必须在 mihomo 之前启动。tailscale 首次登录时若已有 TUN 会卡死；
+  # 已登录状态下 tailscaled 读取 /var/lib/tailscale 的 state，不依赖 DNS。
+  # 首次登录或重新认证时仍需临时停掉 mihomo，正常开机不需要。
+  systemd.services.tailscaled.before = [ "mihomo.service" ];
+
   # 系统 DNS 交给 mihomo。fake-ip 只回 A 记录，应用不会产生 IPv6 连接。
   networking.networkmanager.dns = "none";
   networking.resolvconf.enable = true;
