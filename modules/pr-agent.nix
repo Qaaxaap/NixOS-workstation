@@ -49,6 +49,8 @@
         # 关闭 PR opened 等事件的自动命令，只保留评论触发的 /review。
         GITHUB_APP__HANDLE_PR_ACTIONS = "[]";
         GITHUB_APP__PR_COMMANDS = "[]";
+        # findings 优先发成行内 review 评论；无法锚定或已合并 PR 回退到摘要。
+        PR_REVIEWER__INLINE_KEY_ISSUES = "true";
       };
     };
   };
