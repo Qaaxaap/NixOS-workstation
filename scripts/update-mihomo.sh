@@ -34,12 +34,9 @@ nix run nixpkgs#yq-go -- -i '
   .dns["default-nameserver"] = ["223.5.5.5", "119.29.29.29"] |
   .rules = [
     "PROCESS-NAME,frpc-of,DIRECT",
-    "PROCESS-NAME,.tailscaled-wrapped,DIRECT",
     "DOMAIN-SUFFIX,ofalias.net,DIRECT",
     "DOMAIN-SUFFIX,naids.com,DIRECT",
     "DOMAIN-SUFFIX,openfrp.net,DIRECT",
-    "DOMAIN-SUFFIX,tailscale.com,DIRECT",
-    "DOMAIN-SUFFIX,ts.net,DIRECT",
     "IP-CIDR,100.64.0.0/10,DIRECT",
     "IP-CIDR6,fd7a:115c:a1e0::/48,DIRECT"
   ] + (.rules // [])
