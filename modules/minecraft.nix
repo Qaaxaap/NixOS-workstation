@@ -78,7 +78,7 @@
         environment = {
           EULA = "true";
           TYPE = "VANILLA";
-          VERSION = "LATEST";
+          VERSION = "26.3";
           ONLINE_MODE = "false";
           SEED = "1905100098";
           UID = "967";
