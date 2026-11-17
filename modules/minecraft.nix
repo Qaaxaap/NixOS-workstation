@@ -67,6 +67,28 @@
           LEVEL = "world";
         };
       };
+
+      # 临时原版服，复用 frpc-mc 隧道的本地端口（25565，主服运行时不要同时启动）。
+      # 关闭正版验证，种子 1905100098，白名单默认关闭。
+      mc-vanilla = {
+        image = "itzg/minecraft-server";
+        autoStart = false;
+        ports = [ "25565:25565" ];
+        volumes = [ "/srv/minecraft/mc-vanilla:/data" ];
+        environment = {
+          EULA = "true";
+          TYPE = "VANILLA";
+          VERSION = "LATEST";
+          ONLINE_MODE = "false";
+          SEED = "1905100098";
+          UID = "967";
+          GID = "967";
+          MAX_MEMORY = "8192M";
+          INIT_MEMORY = "1024M";
+          MODE = "survival";
+          LEVEL = "world";
+        };
+      };
     };
   };
 }
