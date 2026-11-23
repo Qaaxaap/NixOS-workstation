@@ -29,7 +29,7 @@ stdenv.mkDerivation {
   # 沿用 AUR wechat-bin 的官方 deb 地址。
   src = fetchurl {
     url = "https://dldir1v6.qq.com/weixin/Universal/Linux/WeChatLinux_x86_64.deb";
-    hash = "sha256-1bIcbiEYaliyv1BcSpO+Q+UUnNZMaa4UA6FxbCROws=";
+    hash = "sha256-1bIcbiEYaliywv1BcSpO+Q+UUnNZMaa4UA6FxbCROws=";
   };
 
   nativeBuildInputs = [
