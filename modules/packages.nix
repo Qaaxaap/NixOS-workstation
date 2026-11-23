@@ -112,6 +112,7 @@ in
 
     # 游戏
     steam
+    steam-run
     wine
     winetricks
 
