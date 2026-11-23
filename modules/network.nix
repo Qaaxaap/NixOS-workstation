@@ -30,6 +30,8 @@
   };
 
   services.tailscale.enable = true;
+  # tailscaled 被 OOM killer 杀掉会导致 tailnet 失联，给最高豁免。
+  systemd.services.tailscaled.serviceConfig.OOMScoreAdjust = -1000;
 
   virtualisation.docker = {
     enable = true;

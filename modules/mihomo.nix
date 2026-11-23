@@ -11,6 +11,8 @@
 
     serviceConfig = {
       Type = "simple";
+      # 代理内核被 OOM killer 杀掉会导致全局断网，给最高豁免。
+      OOMScoreAdjust = -1000;
       # metacubexd 是 mihomo 官方 web 面板，通过 9090 的 /ui/ 提供。
       ExecStart = "${lib.getExe pkgs.mihomo} -d /var/lib/mihomo -f /var/lib/mihomo/config.yaml -ext-ui ${pkgs.metacubexd}";
       Restart = "on-failure";
