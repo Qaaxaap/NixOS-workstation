@@ -97,7 +97,7 @@ in
     };
   };
 
-  systemd.oomd.enable = false;
+  systemd.oomd.enable = true;
 
   # 模型权重等不可压缩数据用 zram 反而占内存，改用 zswap：
   # 可压缩页留在内存压缩池，不可压缩页直接写磁盘 swap。
