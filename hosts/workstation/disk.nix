@@ -113,6 +113,6 @@ in
   ];
 
   boot.supportedFilesystems = [ "ntfs3" ];
-  # 磁盘 swap 之上启用 zswap 压缩缓存，减少 NVMe 写入。
-  boot.zswap.enable = true;
+  # zram 与 zswap 在 NixOS 中互斥，保留 zram 优先使用。
+  boot.zswap.enable = false;
 }
