@@ -97,9 +97,22 @@ in
     };
   };
 
-  # 磁盘无交换分区。用 zram 提供交换，上限为内存的 10%。
+  systemd.oomd.enable = false;
+
+  # NVMe 上 32G swap 分区，zram 优先使用，磁盘 swap 兜底。
   zramSwap.enable = true;
-  zramSwap.memoryPercent = 10;
+  zramSwap.memoryPercent = 100;
+  zramSwap.algorithm = "zstd";
+  zramSwap.priority = 100;
+
+  swapDevices = [
+    {
+      device = "/dev/disk/by-uuid/00054eb6-78da-4705-af44-79670438ce47";
+      priority = 10;
+    }
+  ];
 
   boot.supportedFilesystems = [ "ntfs3" ];
+  # 磁盘 swap 之上启用 zswap 压缩缓存，减少 NVMe 写入。
+  boot.zswap.enable = true;
 }
