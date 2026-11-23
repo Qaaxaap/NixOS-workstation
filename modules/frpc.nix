@@ -11,6 +11,8 @@ let
       Type = "simple";
       Restart = "always";
       RestartSec = 10;
+      # 隧道进程被 OOM killer 杀掉会导致公网服务失联，给最高豁免。
+      OOMScoreAdjust = -1000;
       ExecStart = "${pkgs.writeShellScript "frpc-${name}" ''
         exec ${pkgs.frpc-of}/bin/frpc-of -n -u "$(cat ${tokenFile})" -p ${tunnelId}
       ''}";
