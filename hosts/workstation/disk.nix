@@ -99,11 +99,9 @@ in
 
   systemd.oomd.enable = false;
 
-  # NVMe 上 32G swap 分区，zram 优先使用，磁盘 swap 兜底。
-  zramSwap.enable = true;
-  zramSwap.memoryPercent = 100;
-  zramSwap.algorithm = "zstd";
-  zramSwap.priority = 100;
+  # 模型权重等不可压缩数据用 zram 反而占内存，改用 zswap：
+  # 可压缩页留在内存压缩池，不可压缩页直接写磁盘 swap。
+  zramSwap.enable = false;
 
   swapDevices = [
     {
@@ -113,6 +111,6 @@ in
   ];
 
   boot.supportedFilesystems = [ "ntfs3" ];
-  # zram 与 zswap 在 NixOS 中互斥，保留 zram 优先使用。
-  boot.zswap.enable = false;
+  boot.zswap.enable = true;
+  boot.zswap.maxPoolPercent = 20;
 }
